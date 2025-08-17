@@ -1,5 +1,6 @@
 import time
 import asyncio
+from asyncio import gather
 
 from iot.devices import HueLightDevice, SmartSpeakerDevice, SmartToiletDevice
 from app.iot.message import Message, MessageType
@@ -11,9 +12,12 @@ async def main() -> None:
     hue_light = HueLightDevice()
     speaker = SmartSpeakerDevice()
     toilet = SmartToiletDevice()
-    hue_light_id = await service.register_device(hue_light)
-    speaker_id = await service.register_device(speaker)
-    toilet_id = await service.register_device(toilet)
+    hue_light_id, speaker_id, toilet_id = await gather(
+        service.register_device(hue_light),
+        service.register_device(speaker),
+        service.register_device(toilet)
+    )
+
 
     await run_sequence(
         run_parallel(

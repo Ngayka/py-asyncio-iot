@@ -11,19 +11,19 @@ TIME_TO_SLEEP = 0.5
 class HueLightDevice:
     async def connect(self) -> None:
         print("Connecting Hue Light.")
-        time.sleep(TIME_TO_SLEEP)
+        await asyncio.sleep(TIME_TO_SLEEP)
         print("Hue Light connected.")
 
     async def disconnect(self) -> None:
         print("Disconnecting Hue Light.")
-        time.sleep(TIME_TO_SLEEP)
+        await asyncio.sleep(TIME_TO_SLEEP)
         print("Hue Light disconnected.")
 
     async def send_message(self, message_type: MessageType, data: str = "") -> None:
         print(
             f"Hue Light handling message of type {message_type.name} with data [{data}]."
         )
-        time.sleep(TIME_TO_SLEEP)
+        await asyncio.sleep(TIME_TO_SLEEP)
         print("Hue Light received message.")
 
 
